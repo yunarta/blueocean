@@ -3,7 +3,21 @@ pipeline {
   stages {
     stage('Check') {
       steps {
-        sh 'printenv'
+        parallel(
+          "Check": {
+            sh 'printenv'
+            
+          },
+          "Build": {
+            sh 'ls -al'
+            
+          }
+        )
+      }
+    }
+    stage('Run') {
+      steps {
+        sh 'pwd'
       }
     }
   }
